@@ -1,0 +1,51 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Doctor {
+  id           String @id @default(cuid())
+  firstName    String @map("first_name")
+  secondName   String @map("second_name")
+  doctorName   String @map("doctor_name")
+  passwordHash String
+  salt         String @default("")
+
+  createdAt DateTime? @default(now()) @map("created_at")
+  updatedAt DateTime? @default(now()) @map("updated_at")
+
+  Patient Patient[]
+}
+
+model Patient {
+  id String @id @default(cuid())
+
+  firstName  String @map("first_name")
+  secondName String @map("second_name")
+
+  doctor         Doctor?  @relation(fields: [doctorId], references: [id], onDelete: Cascade)
+  doctorId       String   @map("doctor_id")
+  birthday       DateTime
+  gender         String
+  medicalHistory String?  @map("medical_history")
+  address        String
+  diagnose       String?
+
+  enterAt   DateTime  @default(now()) @map("enter_at")
+  createdAt DateTime? @default(now()) @map("created_at")
+  updatedAt DateTime? @default(now()) @map("updated_at")
+
+  Analyze Analyze[]
+}
+
+model Analyze {
+  id        String    @id @default(cuid())
+  value     Float
+  patient   Patient?  @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  patientId String
+  createdAt DateTime? @default(now()) @map("created_at")
+}
