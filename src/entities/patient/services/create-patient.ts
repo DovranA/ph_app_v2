@@ -1,4 +1,3 @@
-import { sessionService } from "@/entities/doctor/server";
 import { CreatePatientSchema } from "../domain";
 import { patientRepository } from "../repositories/patient";
 import cuid from "cuid";
