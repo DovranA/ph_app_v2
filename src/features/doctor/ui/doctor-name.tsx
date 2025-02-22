@@ -6,7 +6,7 @@ const DoctorName = async () => {
   const { session } = await sessionService.verifySession();
   const doctor = await doctorRepository.getDoctor({ id: session.id });
   return (
-    <div className="text-lg">
+    <div className="text-lg font-semibold">
       {doctor?.firstName} {doctor?.secondName}
     </div>
   );

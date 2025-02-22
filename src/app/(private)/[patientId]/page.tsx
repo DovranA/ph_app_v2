@@ -1,8 +1,7 @@
 import { analyzeListService } from "@/entities/analyze/server";
 import { getCurrentPatient } from "@/entities/patient/server";
 import { AnalyzeDiagram } from "@/features/analyze";
-import { Button } from "@/shared/ui/button";
-import { Play } from "lucide-react";
+
 function convertToDDMMYYYY(dateString: Date | undefined) {
   const date = new Date(dateString ?? "");
 
@@ -22,47 +21,94 @@ export default async function Page({
   const patientData = await getCurrentPatient(patientId);
   const analyzeData = await analyzeListService({ patientId });
 
+  // console.log(patientData);
+
   return (
     <div className="w-full h-[calc(100vh-5rem)] flex flex-col justify-between">
-      <div className="w-full flex p-6 text-lg">
-        <div className="flex-1">
-          <div>
-            Ady: <span>{patientData?.firstName}</span>
-          </div>
-          <div>
-            Familyasy: <span>{patientData?.secondName}</span>
-          </div>
-          <div>
-            Doglan yyly: <span>{convertToDDMMYYYY(patientData?.birthday)}</span>
-          </div>
-        </div>
-        <div className="flex-1">
-          <div>
-            Diagnose: <span>{patientData?.diagnose}</span>
-          </div>
-          <div>
-            Giren wagty: <span>{convertToDDMMYYYY(patientData?.enterAt)}</span>
-          </div>
-          <div>
-            Jynsy: <span>{patientData?.gender === "M" ? "Erkek" : "Ayal"}</span>
-          </div>
-        </div>
-        <div className="flex-1">
-          <div>
-            Kesel taryhy: <span>{patientData?.medicalHistory}</span>
-          </div>
-          <div>
-            Test material : <span>{patientData?.testMaterial}</span>
-          </div>
-        </div>
-        <div className="flex justify-center items-center">
-          <Button>
-            <Play />
-          </Button>
-        </div>
+      <div className="w-full flex p-6 text-lg gap-4">
+        <DetailColumn
+          first={patientData?.firstName ?? ""}
+          second={patientData?.secondName ?? ""}
+          firstkey="Ady"
+          secondkey="Familiýasy"
+        />
+        <DetailColumn
+          first={convertToDDMMYYYY(patientData?.birthday) ?? ""}
+          second={patientData?.address ?? ""}
+          firstkey="Doglan senesi"
+          secondkey="Addresi"
+        />
+        <DetailColumn
+          first={patientData?.medicalHistory ?? ""}
+          second={patientData?.diagnose ?? ""}
+          firstkey="Kesel taryhy"
+          secondkey="Diagnosy"
+        />
+        <DetailColumn
+          first={convertToDDMMYYYY(patientData?.enterAt) ?? ""}
+          second={convertToDDMMYYYY(patientData?.createdAt)}
+          firstkey="Giren wagty"
+          secondkey="Ýazga alnan wagty"
+        />
       </div>
-
+      <PhBoxes />
       <AnalyzeDiagram {...analyzeData} />
     </div>
   );
 }
+
+const DetailColumn = ({
+  first,
+  second,
+  firstkey,
+  secondkey,
+}: {
+  firstkey?: string;
+  secondkey?: string;
+  first?: string;
+  second?: string;
+}) => {
+  return (
+    <div className="flex-1 bg-white py-2 px-4 rounded-lg">
+      <div>
+        {firstkey}: <span>{first}</span>
+      </div>
+      <div>
+        {secondkey} : <span>{second}</span>
+      </div>
+    </div>
+  );
+};
+
+const PhBoxes = () => {
+  const phs = [
+    "one",
+    "two",
+    "three",
+    "four",
+    "five",
+    "six",
+    "seven",
+    "eight",
+    "nine",
+    "ten",
+    "eleven",
+    "twelve",
+    "thirdteen",
+    "fourteen",
+  ];
+  return (
+    <div className="flex w-full h-14 gap-2 px-5">
+      {phs.map((ph, index) => {
+        return (
+          <div
+            key={index}
+            className={`${ph}  h-14 flex-1 flex items-center justify-center rounded-lg`}
+          >
+            <p className="text-lg text-white font-semibold ">{index + 1}ph</p>
+          </div>
+        );
+      })}
+    </div>
+  );
+};

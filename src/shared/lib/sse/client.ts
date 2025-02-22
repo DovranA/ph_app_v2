@@ -25,7 +25,7 @@ export function useEventsSource<T>(url: string, onData?: (data: T) => void) {
     });
 
     return () => gameEvents.close();
-  }, [url]);
+  }, [url, onData]);
 
   return {
     dataStream: data,

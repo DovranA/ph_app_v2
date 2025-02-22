@@ -28,9 +28,11 @@ export function PatientFormDialog({
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button>Hassa döretmek</Button>
+        <Button className="bg-blue-500 hover:bg-blue-500/80 font-semibold">
+          Näsag döretmek
+        </Button>
       </DialogTrigger>
-      <DialogContent className="w-full max-w-3xl">
+      <DialogContent className="w-full max-w-3xl bg-white">
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold text-center">
             {title}

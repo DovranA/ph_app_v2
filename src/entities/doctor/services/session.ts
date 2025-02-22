@@ -57,7 +57,7 @@ const verifySession = async (getCookies = getSessionCookies) => {
       redirect("/sign-in");
     }
     return { isAuth: true, session: session };
-  } catch (error) {
+  } catch (error: any) {
     redirect("/sign-in");
   }
 };

@@ -1,4 +1,3 @@
-import { sessionService } from "@/entities/doctor/server";
 import { SignOut } from "@/features/auth";
 import { DoctorName } from "@/features/doctor";
 import Link from "next/link";
@@ -10,10 +9,9 @@ export default async function PrivateLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const { session } = await sessionService.verifySession();
   return (
     <div className="flex flex-col grow">
-      <header className="px-10 py-4 flex flex-row gap-4 justify-between border-b border-b-primary/50 items-center">
+      <header className="px-10 py-4 flex flex-row gap-4 bg-blue-500 text-white justify-between border-b border-b-primary/50 items-center">
         <div className="text-xl">
           <Link href="/">PH APP</Link>
         </div>

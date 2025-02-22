@@ -11,7 +11,8 @@ export const createPatientService = async (patient: CreatePatientSchema) => {
       updatedAt: new Date(),
     });
     return createdPatient;
-  } catch (error) {
+  } catch (error: any) {
+    console.error(error);
     throw new Error("error create patient");
   }
 };

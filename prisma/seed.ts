@@ -22,7 +22,6 @@ async function main() {
       birthday: new Date(),
       gender: "M",
       doctorId: "cm751qj310000wcvag6587iji",
-      testMaterial: "test material3",
       medicalHistory: "history4",
       diagnose: "dignozzzzzy 6",
       id: cuid(),

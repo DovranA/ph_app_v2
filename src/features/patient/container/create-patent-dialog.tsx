@@ -23,11 +23,11 @@ export function CreatePatentForm({ doctorId }: Props) {
     if (formState?.success) {
       router.refresh();
     }
-  }, [formState.success]);
+  }, [formState.success, router]);
 
   return (
     <PatientFormDialog
-      title="Hassa goşmak"
+      title="Näsag goşmak"
       description=""
       action={action}
       fields={<PatentFormFields doctorId={doctorId} {...formState} />}

@@ -9,7 +9,11 @@ export function SubmitButton({
   isPending?: boolean;
 }) {
   return (
-    <Button disabled={isPending} type="submit" className="w-full mt-10">
+    <Button
+      disabled={isPending}
+      type="submit"
+      className="w-full mt-10 bg-blue-500 hover:bg-blue-500/80 font-semibold"
+    >
       {children}
     </Button>
   );

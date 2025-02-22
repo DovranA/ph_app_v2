@@ -65,7 +65,6 @@ export const createPatientAction = async (
       id: cuid(),
       createdAt: new Date(),
       updatedAt: new Date(),
-      testMaterial: "",
       medicalHistory: "",
     });
     return {

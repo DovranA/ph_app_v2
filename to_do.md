@@ -1,2 +1,2 @@
-hassa -nasag
+näsag -nasag
 Diagnose - kesel kesgidi

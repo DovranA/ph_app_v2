@@ -1,6 +1,6 @@
 import prisma from "@/shared/lib/db";
 import { Doctor, Prisma } from "@prisma/client";
-import { CreateDoctorSchema, DoctorSchema } from "../domain";
+import { DoctorSchema } from "../domain";
 
 export function saveDoctor(
   doctor: Doctor

@@ -1,4 +1,4 @@
 import { CreatePatentForm } from "./container/create-patent-dialog";
+import PatientDelete from "./ui/patient-delete";
 import PatientList from "./ui/patient-list";
-
-export { CreatePatentForm, PatientList };
+export { PatientDelete, CreatePatentForm, PatientList };

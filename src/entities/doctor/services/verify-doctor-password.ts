@@ -1,4 +1,4 @@
-import { DoctorEntity, DoctorWithoutPassword } from "../domain";
+import { DoctorEntity } from "../domain";
 import { doctorRepository } from "../repositories/doctor";
 import { passwordService } from "./password";
 

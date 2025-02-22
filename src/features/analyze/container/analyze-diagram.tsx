@@ -35,8 +35,8 @@ const AnalyzeDiagram = ({ analyzes }: Props) => {
   useEffect(() => {
     if (
       typeof dataStream?.message === "number" &&
-      dataStream?.message !== analyzeData[analyzeData.length - 1].value
-    )
+      dataStream?.message !== analyzeData[analyzeData.length - 1]?.value
+    ) {
       fetch(`/api/analyze/${patientId}`, {
         method: "POST",
         body: JSON.stringify({ value: dataStream?.message }),
@@ -50,11 +50,12 @@ const AnalyzeDiagram = ({ analyzes }: Props) => {
             return updatedData;
           });
         });
-  }, [dataStream?.message]);
+    }
+  }, [dataStream?.message, analyzeData, patientId]);
   return (
     <div className="flex items-center gap-6 px-4">
       <div
-        className={`aspect-[1/1] w-96 h-96 rounded-full flex items-center justify-center ${colorArr[color]}`}
+        className={`aspect-[1/1] w-96 h-96 rounded-full text-white flex items-center justify-center ${colorArr[color]}`}
       >
         <p className="text-9xl font-semibold">
           {analyzeData[analyzeData.length - 1].value}

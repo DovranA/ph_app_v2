@@ -10,7 +10,8 @@ export const createAnalyzeService = async (analyze: CreateAnalyzeSchema) => {
       createdAt: new Date(),
     });
     return createdPatient;
-  } catch (error) {
+  } catch (error: any) {
+    console.error(error);
     throw new Error("error create patient");
   }
 };
