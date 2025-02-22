@@ -28,7 +28,7 @@ export function PatientFormDialog({
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button>Create Patient</Button>
+        <Button>Hassa döretmek</Button>
       </DialogTrigger>
       <DialogContent className="w-full max-w-3xl">
         <DialogHeader>

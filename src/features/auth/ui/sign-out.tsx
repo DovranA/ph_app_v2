@@ -13,7 +13,7 @@ export function SignOut() {
         redirect(routes.signIn());
       }}
     >
-      <Button>Sign out</Button>
+      <Button>Çykmak</Button>
     </form>
   );
 }

@@ -8,7 +8,7 @@ body {
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: 0 10% 10%;
     --foreground: 0 0% 3.9%;
     --card: 0 0% 100%;
     --card-foreground: 0 0% 3.9%;
@@ -69,4 +69,50 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.phdef {
+  background: black !important;
+}
+.one {
+  background: #f53333 !important;
+}
+.two {
+  background: #f53179 !important;
+}
+.three {
+  background: #f7811d !important;
+}
+.four {
+  background: #fea610 !important;
+}
+.five {
+  background: #fbed12 !important;
+}
+.six {
+  background: #9cc841 !important;
+}
+.seven {
+  background: #4aba4c !important;
+}
+.eight {
+  background: #00994b !important;
+}
+.nine {
+  background: #199daa !important;
+}
+.ten {
+  background: #4776c6 !important;
+}
+.eleven {
+  background: #404899 !important;
+}
+.twelve {
+  background: #1a207e !important;
+}
+.thirdteen {
+  background: #8d257e !important;
+}
+.fourteen {
+  background: #812578 !important;
 }

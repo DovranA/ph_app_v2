@@ -48,12 +48,12 @@ export function PatentFormFields({
       />
       <div className="flex flex-col flex-1 gap-2">
         <div className="space-y-2">
-          <Label htmlFor={firstNameId}>First Name</Label>
+          <Label htmlFor={firstNameId}>Ady</Label>
           <Input
             id={firstNameId}
             type="text"
             name="firstName"
-            placeholder="Enter patient first name"
+            placeholder="Ady"
             defaultValue={formData?.get("firstName")?.toString()}
           />
           {errors?.firstName && (
@@ -61,12 +61,12 @@ export function PatentFormFields({
           )}
         </div>
         <div className="space-y-2">
-          <Label htmlFor={secondNameId}>Second Name</Label>
+          <Label htmlFor={secondNameId}>Familýasy</Label>
           <Input
             id={secondNameId}
             type="text"
             name="secondName"
-            placeholder="Enter your password"
+            placeholder="Familyasy"
             defaultValue={formData?.get("secondName")?.toString()}
           />
           {errors?.secondName && (
@@ -74,12 +74,12 @@ export function PatentFormFields({
           )}
         </div>
         <div className="space-y-2">
-          <Label htmlFor={genderId}>Gender</Label>
+          <Label htmlFor={genderId}>Jynsy</Label>
           <Select name="gender">
             <SelectTrigger id={genderId} className="">
               <SelectValue
                 defaultValue={formData?.get("gender")?.toString()}
-                placeholder="Gender"
+                placeholder="Jynsy"
               />
             </SelectTrigger>
             <SelectContent>

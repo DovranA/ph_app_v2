@@ -17,6 +17,7 @@ export function CreatePatentForm({ doctorId }: Props) {
     createPatientAction,
     {} as PatientFormState
   );
+
   const router = useRouter();
   useEffect(() => {
     if (formState?.success) {
@@ -26,7 +27,7 @@ export function CreatePatentForm({ doctorId }: Props) {
 
   return (
     <PatientFormDialog
-      title="Create Patient"
+      title="Hassa goşmak"
       description=""
       action={action}
       fields={<PatentFormFields doctorId={doctorId} {...formState} />}

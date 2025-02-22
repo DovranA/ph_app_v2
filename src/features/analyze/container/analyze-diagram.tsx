@@ -8,6 +8,24 @@ type Props = {
   analyzes: Analyze[];
   total: number;
 };
+const color = 4;
+const colorArr = [
+  "phdef",
+  "one",
+  "two",
+  "three",
+  "four",
+  "five",
+  "six",
+  "seven",
+  "eight",
+  "nine",
+  "ten",
+  "eleven",
+  "twelve",
+  "thirdteen",
+  "fourteen",
+];
 const AnalyzeDiagram = ({ analyzes }: Props) => {
   const { patientId } = useParams<{ patientId: string }>();
   const { dataStream } = useEventsSource<{ message: number | string }>(
@@ -34,8 +52,17 @@ const AnalyzeDiagram = ({ analyzes }: Props) => {
         });
   }, [dataStream?.message]);
   return (
-    <div className="w-full  border border-red-500">
-      <ChartAnalyze analyzeData={analyzeData} />
+    <div className="flex items-center gap-6 px-4">
+      <div
+        className={`aspect-[1/1] w-96 h-96 rounded-full flex items-center justify-center ${colorArr[color]}`}
+      >
+        <p className="text-9xl font-semibold">
+          {analyzeData[analyzeData.length - 1].value}
+        </p>
+      </div>
+      <div className="w-full ">
+        <ChartAnalyze analyzeData={analyzeData} />
+      </div>
     </div>
   );
 };

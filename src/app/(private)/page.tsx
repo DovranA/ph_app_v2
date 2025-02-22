@@ -5,12 +5,7 @@ type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
 export async function generateMetadata(props: {
   params: Params;
   searchParams: SearchParams;
-}) {
-  const params = await props.params;
-  const searchParams = await props.searchParams;
-  const slug = params.slug;
-  const query = searchParams.query;
-}
+}) {}
 export default async function Home({
   searchParams,
 }: {
@@ -26,7 +21,7 @@ export default async function Home({
   return (
     <div className="flex flex-col gap-2 container mx-auto pt-[50px]">
       <div className="flex justify-between">
-        <h1 className="text-4xl font-bold">Patient list</h1>
+        <h1 className="text-4xl font-bold">Hasallar</h1>
         <CreatePatentForm doctorId={id} />
       </div>
       <PatientList page={page} search={search} />
