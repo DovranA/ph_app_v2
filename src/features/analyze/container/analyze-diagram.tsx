@@ -58,7 +58,7 @@ const AnalyzeDiagram = ({ analyzes }: Props) => {
         className={`aspect-[1/1] w-96 h-96 rounded-full text-white flex items-center justify-center ${colorArr[color]}`}
       >
         <p className="text-9xl font-semibold">
-          {analyzeData[analyzeData.length - 1].value}
+          {analyzeData[analyzeData.length - 1]?.value ?? 0}
         </p>
       </div>
       <div className="w-full ">
