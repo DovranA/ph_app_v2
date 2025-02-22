@@ -82,7 +82,7 @@ export function DataTable<TData extends { id: string }, TValue>({
     }
   };
 
-  let pagination: PaginationState = {
+  const pagination: PaginationState = {
     pageIndex: Number(getQuery("index") || 0),
     pageSize: Number(getQuery("size") || 10),
   };
@@ -115,17 +115,23 @@ export function DataTable<TData extends { id: string }, TValue>({
   const pathname = usePathname();
   const router = useRouter();
 
-  const handleSearch = React.useCallback(
-    debounce((term: string) => {
-      const params = new URLSearchParams(searchParams);
-      if (term) {
-        params.set("s", term);
-      } else {
-        params.delete("s");
-      }
-      router.replace(`${pathname}?${params.toString()}`);
-    }, 300),
+  const debouncedSearch = React.useMemo(
+    () =>
+      debounce((term: string) => {
+        const params = new URLSearchParams(searchParams);
+        if (term) {
+          params.set("s", term);
+        } else {
+          params.delete("s");
+        }
+        router.replace(`${pathname}?${params.toString()}`);
+      }, 300),
     [searchParams, pathname, router]
+  );
+
+  const handleSearch = React.useCallback(
+    (term: string) => debouncedSearch(term),
+    [debouncedSearch]
   );
 
   const handlePagePrev = () => {
@@ -140,14 +146,17 @@ export function DataTable<TData extends { id: string }, TValue>({
     <div className="w-full">
       <div className="flex items-center py-4">
         <Input
-          placeholder="Filter emails..."
+          placeholder="Gözleg..."
           onChange={(event) => handleSearch(event.target.value)}
           className="max-w-sm"
         />
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="ml-auto">
-              Columns <ChevronDown />
+            <Button
+              variant="outline"
+              className="ml-auto bg-blue-500 text-white hover:bg-blue-500/80 hover:text-white"
+            >
+              Sütün <ChevronDown />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
@@ -197,11 +206,13 @@ export function DataTable<TData extends { id: string }, TValue>({
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
+                  className="hover:bg-blue-100"
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell
                       onClick={() =>
                         !cell.id.includes("select") &&
+                        !cell.id.includes("actions") &&
                         router.push(`${pathname}${cell.row.original.id}`)
                       }
                       key={cell.id}
@@ -238,16 +249,18 @@ export function DataTable<TData extends { id: string }, TValue>({
             size="sm"
             onClick={() => handlePagePrev()}
             disabled={!table.getCanPreviousPage()}
+            className="bg-white border-blue-500 hover:text-white text-blue-500 font-semibold hover:bg-blue-500"
           >
-            Previous
+            Öňki sahypa
           </Button>
           <Button
             variant="outline"
             size="sm"
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
+            className="bg-white border-blue-500 hover:text-white text-blue-500 font-semibold hover:bg-blue-500"
           >
-            Next
+            Indiki sahypa
           </Button>
         </div>
       </div>

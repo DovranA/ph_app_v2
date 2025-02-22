@@ -24,7 +24,7 @@ export function DatePicker({ defaultValue, id, name, placeholder }: Props) {
         <Button
           variant={"outline"}
           className={cn(
-            " justify-start text-left font-normal",
+            " justify-start text-left font-normal bg-white",
             !date && "text-muted-foreground"
           )}
         >
@@ -39,7 +39,7 @@ export function DatePicker({ defaultValue, id, name, placeholder }: Props) {
         value={date ? date.toISOString().split("T")[0] : ""}
         defaultValue={defaultValue?.toString()}
         name={name}
-        className="hidden"
+        className="hidden bg-white"
         readOnly
       />
       <PopoverContent className="w-auto p-0">
@@ -49,6 +49,7 @@ export function DatePicker({ defaultValue, id, name, placeholder }: Props) {
           selected={date}
           onSelect={(date) => setDate(date)}
           initialFocus
+          className="bg-white"
         />
       </PopoverContent>
     </Popover>

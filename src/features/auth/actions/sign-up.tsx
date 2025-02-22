@@ -45,7 +45,7 @@ export const signUpAction = async (
   try {
     createDoctorResult = await createDoctor({
       ...result.data,
-      doctorName: `${result.data.firstName}_${result.data.secondName}`,
+      doctorName: `${result.data.firstName.toLowerCase()}_${result.data.secondName.toLowerCase()}`,
     });
   } catch (error: any) {
     errors = error;
@@ -56,8 +56,7 @@ export const signUpAction = async (
       doctorName: createDoctorResult.doctorName,
       id: createDoctorResult.id,
     });
-
-    redirect("/");
+    redirect("/sign-in");
   }
 
   return {

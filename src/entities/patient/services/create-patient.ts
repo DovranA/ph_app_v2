@@ -1,4 +1,3 @@
-import { sessionService } from "@/entities/doctor/server";
 import { CreatePatientSchema } from "../domain";
 import { patientRepository } from "../repositories/patient";
 import cuid from "cuid";
@@ -12,7 +11,8 @@ export const createPatientService = async (patient: CreatePatientSchema) => {
       updatedAt: new Date(),
     });
     return createdPatient;
-  } catch (error) {
+  } catch (error: any) {
+    console.error(error);
     throw new Error("error create patient");
   }
 };

@@ -14,6 +14,7 @@ import { Patient } from "@prisma/client";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown, MoreHorizontal } from "lucide-react";
 import { format } from "date-fns/format";
+import PatientDelete from "../patient-delete";
 export const columns: ColumnDef<Patient>[] = [
   {
     id: "select",
@@ -92,20 +93,19 @@ export const columns: ColumnDef<Patient>[] = [
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
+              <span className="sr-only">Munu</span>
               <MoreHorizontal />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
+            <DropdownMenuLabel>Hereketler</DropdownMenuLabel>
             <DropdownMenuItem
+              className="text-red-500"
               onClick={() => navigator.clipboard.writeText(payment.id)}
             >
-              Copy payment ID
+              <PatientDelete id={row.original.id} />
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>View customer</DropdownMenuItem>
-            <DropdownMenuItem>View payment details</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );

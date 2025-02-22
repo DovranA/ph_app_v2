@@ -1,7 +1,7 @@
 import cuid from "cuid";
 import { doctorRepository } from "../repositories/doctor";
 import { passwordService } from "./password";
-import { CreateDoctorSchema, DoctorSchema } from "../domain";
+import { CreateDoctorSchema } from "../domain";
 
 export const createDoctor = async ({
   doctorName,

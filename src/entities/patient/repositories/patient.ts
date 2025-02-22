@@ -9,6 +9,9 @@ function createPatients(patient: Patient) {
     omit: { doctorId: true },
   });
 }
+function deletePatient(id: string) {
+  return prisma.patient.delete({ where: { id } });
+}
 
 function getPatient(where: Prisma.PatientWhereInput) {
   return prisma.patient.findFirst({
@@ -27,4 +30,9 @@ async function getPatientList(
 
   return { patients, total };
 }
-export const patientRepository = { createPatients, getPatient, getPatientList };
+export const patientRepository = {
+  createPatients,
+  getPatient,
+  getPatientList,
+  deletePatient,
+};

@@ -13,7 +13,9 @@ export function SignOut() {
         redirect(routes.signIn());
       }}
     >
-      <Button>Sign out</Button>
+      <Button className="bg-white font-semibold hover:bg-blue-50 text-blue-500 ">
+        Çykmak
+      </Button>
     </form>
   );
 }
