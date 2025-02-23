@@ -46,7 +46,7 @@ const ChartAnalyze = ({ analyzeData }: Props) => {
       <CardContent className="px-2 pt-4 sm:px-6 sm:pt-6">
         <ChartContainer
           config={chartConfig}
-          className="aspect-auto h-[500px] w-full"
+          className="aspect-auto 2xl:h-[500px] xl:h-80  w-full"
         >
           <BarChart data={analyzeData}>
             <CartesianGrid vertical={false} />

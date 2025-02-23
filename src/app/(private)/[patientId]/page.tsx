@@ -98,12 +98,12 @@ const PhBoxes = () => {
     "fourteen",
   ];
   return (
-    <div className="flex w-full h-14 gap-2 px-5">
+    <div className="flex w-full 2xl:h-14 h-10 gap-2 px-5">
       {phs.map((ph, index) => {
         return (
           <div
             key={index}
-            className={`${ph}  h-14 flex-1 flex items-center justify-center rounded-lg`}
+            className={`${ph} h-full flex-1 flex items-center justify-center rounded-lg`}
           >
             <p className="text-lg text-white font-semibold ">{index + 1}ph</p>
           </div>

@@ -31,7 +31,7 @@ export function CreatePatentForm({ doctorId }: Props) {
       description=""
       action={action}
       fields={<PatentFormFields doctorId={doctorId} {...formState} />}
-      actions={<SubmitButton isPending={isPending}>Create</SubmitButton>}
+      actions={<SubmitButton isPending={isPending}>Näsag goşmak</SubmitButton>}
       error={<ErrorMessage error={formState.errors?._errors} />}
     />
   );

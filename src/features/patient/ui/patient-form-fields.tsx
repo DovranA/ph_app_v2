@@ -83,8 +83,8 @@ export function PatentFormFields({
               />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="M">M</SelectItem>
-              <SelectItem value="F">F</SelectItem>
+              <SelectItem value="M">Erkek</SelectItem>
+              <SelectItem value="F">Zenan</SelectItem>
             </SelectContent>
           </Select>
           {errors?.gender && (
@@ -92,11 +92,11 @@ export function PatentFormFields({
           )}
         </div>
         <div className="space-y-2 flex flex-col">
-          <Label htmlFor={birthdayId}>Birthday</Label>
+          <Label htmlFor={birthdayId}>Doglan senesi</Label>
           <DatePicker
             defaultValue={formData?.get("birthday")}
             name="birthday"
-            placeholder="Enter birthday"
+            placeholder="Doglan senesi"
           />
           {errors?.birthday && (
             <div className="text-red-500 text-sm">{errors.birthday}</div>
@@ -109,7 +109,7 @@ export function PatentFormFields({
           <Textarea
             id={addressId}
             name="address"
-            placeholder="Enter address"
+            placeholder="Address"
             defaultValue={formData?.get("address")?.toString()}
             style={{ resize: "none" }}
             className="h-24"
@@ -123,7 +123,7 @@ export function PatentFormFields({
           <Textarea
             id={diagnoseId}
             name="diagnose"
-            placeholder="Enter diagnose"
+            placeholder="Diagnose"
             defaultValue={formData?.get("diagnose")?.toString()}
             style={{ resize: "none" }}
             className="h-24"
@@ -133,11 +133,11 @@ export function PatentFormFields({
           )}
         </div>
         <div className="space-y-2 flex flex-col flex-1">
-          <Label htmlFor={enterAtId}>Birthday</Label>
+          <Label htmlFor={enterAtId}>Giren senesi</Label>
           <DatePicker
             defaultValue={formData?.get("enterAt")}
             name="enterAt"
-            placeholder="Enter day of patient"
+            placeholder="Giren senesi"
           />
           {errors?.enterAt && (
             <div className="text-red-500 text-sm">{errors.enterAt}</div>

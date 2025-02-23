@@ -52,10 +52,13 @@ const AnalyzeDiagram = ({ analyzes }: Props) => {
         });
     }
   }, [dataStream?.message, analyzeData, patientId]);
+  console.log(Math.round(45.65));
   return (
     <div className="flex items-center gap-6 px-4">
       <div
-        className={`aspect-[1/1] w-96 h-96 rounded-full text-white flex items-center justify-center ${colorArr[color]}`}
+        className={`aspect-[1/1] w-96 h-96 rounded-full transition-all duration-200 ease-linear text-white flex items-center justify-center ${
+          colorArr[Math.round(analyzeData[analyzeData.length - 1]?.value) ?? 0]
+        }`}
       >
         <p className="text-9xl font-semibold">
           {analyzeData[analyzeData.length - 1]?.value ?? 0}
