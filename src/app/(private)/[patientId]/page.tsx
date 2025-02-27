@@ -20,7 +20,6 @@ export default async function Page({
   const patientId = (await params).patientId;
   const patientData = await getCurrentPatient(patientId);
   const analyzeData = await analyzeListService({ patientId });
-
   return (
     <div className="w-full h-[calc(100vh-5rem)] flex flex-col justify-between">
       <div className="w-full flex p-6 text-lg gap-4">

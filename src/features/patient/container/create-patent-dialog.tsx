@@ -1,18 +1,13 @@
 "use client";
 
-import { useActionState } from "@/shared/lib/react";
-import {
-  createPatientAction,
-  PatientFormState,
-} from "../actions/create-patient";
+import { FormDataSchema, Inputs } from "../actions/create-patient";
 import { PatientFormDialog } from "../ui/patent-form-dialog";
 import { ErrorMessage } from "@/features/auth/ui/submit-button copy";
-import { SubmitButton } from "@/features/auth/ui/submit-button";
 import { PatentFormFields } from "../ui/patient-form-fields";
-import { useRouter } from "next/navigation";
 import { ReactNode, useEffect, useState } from "react";
 import { Analyze, Patient } from "@prisma/client";
-
+import { useForm, SubmitHandler } from "react-hook-form";
+import { useRouter } from "next/navigation";
 type Props = {
   doctorId?: string;
   patientId?: string;
@@ -20,54 +15,79 @@ type Props = {
 };
 
 export function CreatePatentForm({ doctorId, patientId, actions }: Props) {
-  const [formData, setFormData] = useState<FormData>(new FormData());
-  const [formState, action, isPending] = useActionState(createPatientAction, {
-    formData: formData,
-  } as PatientFormState);
   const router = useRouter();
-  const [patient, setPatient] = useState<Patient | null>(null); // Initialize as null
-  const fetchPatientData = async (id: string) => {
+  const createMethod = async (body: Inputs) => {
+    try {
+      const res = await fetch(`/api/patient/${patientId ? patientId : ""}`, {
+        body: JSON.stringify({ ...body, doctorId }),
+        method: patientId ? "PATCH" : "POST",
+      });
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
+      }
+      router.refresh();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors },
+    reset,
+  } = useForm<Inputs>();
+  const fetchPatientData = async (id?: string) => {
     try {
       const res = await fetch(`/api/patient/${id}`, { method: "GET" });
       if (!res.ok) {
         throw new Error(`HTTP error! status: ${res.status}`);
       }
-      const data: Patient = await res.json();
-      setPatient(data);
+      const data = await res.json();
+      return data;
     } catch (error) {
       console.error("Error fetching patient data:", error);
+      return null;
     }
   };
 
   useEffect(() => {
     if (patientId) {
-      fetchPatientData(patientId);
+      const getData = async () => {
+        const data = (await fetchPatientData(patientId)) as Patient;
+        if (data) {
+          const { id, createdAt, updatedAt, medicalHistory, gender, ...other } =
+            data;
+          reset({
+            ...other,
+            gender: gender as "M" | "F",
+            diagnose: other.diagnose ?? undefined,
+          });
+        }
+      };
+      getData();
     }
-  }, [patientId]);
-  useEffect(() => {
-    if (formState?.success) {
-      router.refresh();
-    }
-  }, [formState.success, router]);
-  console.log(formData.get("firstName")?.toString());
+  }, [patientId, reset]);
+
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    createMethod(data);
+  };
   return (
     <PatientFormDialog
       title={patientId ? "Näsagy üýtgetmek" : "Näsag goşmak"}
       description=""
-      action={action}
+      action={handleSubmit(onSubmit)}
       fields={
         <PatentFormFields
           doctorId={doctorId}
-          {...formState}
-          patient={patient}
+          register={register}
+          control={control}
+          errors={errors}
         />
       }
       actions={actions}
-      error={
-        <ErrorMessage
-          error={formState?.errors?._errors && formState?.errors?._errors[0]}
-        />
-      }
+      error={<ErrorMessage error={errors && errors.root?._errors.message} />}
     />
   );
 }

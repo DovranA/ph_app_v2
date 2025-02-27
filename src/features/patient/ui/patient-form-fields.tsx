@@ -1,3 +1,4 @@
+"use client";
 import { DatePicker } from "@/shared/ui/date-picker";
 import { Input } from "@/shared/ui/input";
 import { Label } from "@/shared/ui/label";
@@ -9,40 +10,26 @@ import {
   SelectValue,
 } from "@/shared/ui/select";
 import { Textarea } from "@/shared/ui/textarea";
-import React, { useId } from "react";
+import React, { useId, useRef, useEffect, useState } from "react";
+import {
+  Control,
+  Controller,
+  FieldErrors,
+  UseFormRegister,
+} from "react-hook-form";
+import { Inputs } from "../actions/create-patient";
 
 export function PatentFormFields({
-  errors,
   doctorId,
-  patient,
+  register,
+  errors,
+  control,
 }: {
   formData?: FormData;
   doctorId?: string;
-  patient?: {
-    id: string;
-    firstName: string;
-    secondName: string;
-    doctorId: string;
-    birthday: Date;
-    gender: string;
-    nationality: string;
-    section: string;
-    medicalHistory: string | null;
-    address: string;
-    diagnose: string | null;
-    enterAt: Date;
-    createdAt: Date | null;
-    updatedAt: Date | null;
-  } | null;
-  errors?: {
-    firstName?: string;
-    secondName?: string;
-    birthday?: string;
-    gender?: string;
-    address?: string;
-    diagnose?: string;
-    enterAt?: string;
-  };
+  control?: Control<Inputs>;
+  register: UseFormRegister<Inputs>;
+  errors?: FieldErrors<Inputs>;
 }) {
   const firstNameId = useId();
   const secondNameId = useId();
@@ -54,6 +41,7 @@ export function PatentFormFields({
   const docId = useId();
   const nationalityId = useId();
   const sectionId = useId();
+
   return (
     <div className="flex gap-5">
       <Input
@@ -70,12 +58,13 @@ export function PatentFormFields({
           <Input
             id={firstNameId}
             type="text"
-            name="firstName"
+            {...register("firstName", { required: "Ady ýazylmaly" })}
             placeholder="Ady"
-            defaultValue={patient?.firstName}
           />
           {errors?.firstName && (
-            <div className="text-red-500 text-sm">{errors.firstName}</div>
+            <div className="text-red-500 text-sm">
+              {errors.firstName.message}
+            </div>
           )}
         </div>
         <div className="space-y-2">
@@ -83,52 +72,70 @@ export function PatentFormFields({
           <Input
             id={secondNameId}
             type="text"
-            name="secondName"
+            {...register("secondName", { required: "Familiya ýazylmaly" })}
             placeholder="Familyasy"
-            defaultValue={patient?.secondName}
           />
           {errors?.secondName && (
-            <div className="text-red-500 text-sm">{errors.secondName}</div>
+            <div className="text-red-500 text-sm">
+              {errors.secondName.message}
+            </div>
           )}
         </div>
         <div className="space-y-2">
           <Label htmlFor={genderId}>Jynsy</Label>
-          <Select name="gender">
-            <SelectTrigger id={genderId} className="">
-              <SelectValue defaultValue={patient?.gender} placeholder="Jynsy" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="M">Erkek</SelectItem>
-              <SelectItem value="F">Zenan</SelectItem>
-            </SelectContent>
-          </Select>
-          {errors?.gender && (
-            <div className="text-red-500 text-sm">{errors.gender}</div>
-          )}
+          <Controller
+            name="gender"
+            control={control}
+            rules={{ required: "jynsyny saylan" }}
+            render={({ field }) => (
+              <>
+                <Select
+                  onValueChange={(value) => field.onChange(value)}
+                  {...field}
+                >
+                  <SelectTrigger id={genderId} className="">
+                    <SelectValue placeholder="Jynsy" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="M">Erkek</SelectItem>
+                    <SelectItem value="F">Zenan</SelectItem>
+                  </SelectContent>
+                </Select>
+                {errors?.gender && (
+                  <div className="text-red-500 text-sm">
+                    {errors.gender.message}
+                  </div>
+                )}
+              </>
+            )}
+          />
         </div>
         <div className="space-y-2">
           <Label htmlFor={nationalityId}>Milleti</Label>
           <Input
             id={nationalityId}
             type="text"
-            name="nationality"
+            {...register("nationality", { required: "Milleti ýazylmaly" })}
             placeholder="Milleti"
-            defaultValue={patient?.nationality}
           />
-          {errors?.firstName && (
-            <div className="text-red-500 text-sm">{errors.firstName}</div>
+          {errors?.nationality && (
+            <div className="text-red-500 text-sm">
+              {errors.nationality.message}
+            </div>
           )}
         </div>
         <div className="space-y-2 flex flex-col">
           <Label htmlFor={birthdayId}>Doglan senesi</Label>
           <DatePicker
-            defaultValue={patient?.birthday && new Date(patient?.birthday)}
-            name="birthday"
             id={birthdayId}
+            control={control}
+            name="birthday"
             placeholder="Doglan senesi"
           />
           {errors?.birthday && (
-            <div className="text-red-500 text-sm">{errors.birthday}</div>
+            <div className="text-red-500 text-sm">
+              {errors.birthday.message}
+            </div>
           )}
         </div>
       </div>
@@ -137,28 +144,29 @@ export function PatentFormFields({
           <Label htmlFor={addressId}>Address</Label>
           <Textarea
             id={addressId}
+            {...register("address", { required: "Address ýazylmaly" })}
             name="address"
             placeholder="Address"
-            defaultValue={patient?.address ?? ""}
             style={{ resize: "none" }}
             className="h-24"
           />
           {errors?.address && (
-            <div className="text-red-500 text-sm">{errors.address}</div>
+            <div className="text-red-500 text-sm">{errors.address.message}</div>
           )}
         </div>
         <div className="space-y-2 flex flex-col flex-1">
           <Label htmlFor={diagnoseId}>Diagnose</Label>
           <Textarea
             id={diagnoseId}
-            name="diagnose"
+            {...register("diagnose", { required: "Diagnose ýazylmaly" })}
             placeholder="Diagnose"
-            defaultValue={patient?.diagnose ?? ""}
             style={{ resize: "none" }}
             className="h-24"
           />
           {errors?.diagnose && (
-            <div className="text-red-500 text-sm">{errors.diagnose}</div>
+            <div className="text-red-500 text-sm">
+              {errors.diagnose.message}
+            </div>
           )}
         </div>
         <div className="space-y-2">
@@ -166,24 +174,24 @@ export function PatentFormFields({
           <Input
             id={sectionId}
             type="text"
-            name="section"
+            {...register("section", { required: "Bölümi ýaz" })}
             placeholder="Bölüm"
-            defaultValue={patient?.section}
           />
-          {errors?.firstName && (
-            <div className="text-red-500 text-sm">{errors.firstName}</div>
+          {errors?.section && (
+            <div className="text-red-500 text-sm">{errors.section.message}</div>
           )}
         </div>
         <div className="space-y-2 flex flex-col flex-1">
           <Label htmlFor={enterAtId}>Giren senesi</Label>
           <DatePicker
-            defaultValue={patient?.enterAt && new Date(patient?.enterAt)}
-            name="enterAt"
             placeholder="Giren senesi"
             id="enterAtId"
+            name="enterAt"
+            control={control}
+            // ref={enterAtRef}
           />
           {errors?.enterAt && (
-            <div className="text-red-500 text-sm">{errors.enterAt}</div>
+            <div className="text-red-500 text-sm">{errors.enterAt.message}</div>
           )}
         </div>
       </div>

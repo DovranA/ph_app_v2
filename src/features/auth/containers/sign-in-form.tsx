@@ -17,16 +17,16 @@ export function SignInForm() {
 
   return (
     <AuthFormLayout
-      title="Sign In"
-      description="Welcome back! Please sign in to your account"
+      title="Içeri girmek"
+      description=""
       action={action}
       fields={<SignInFields {...formState} />}
-      actions={<SubmitButton isPending={isPending}> Sign In</SubmitButton>}
+      actions={<SubmitButton isPending={isPending}>Iceri girmek</SubmitButton>}
       error={<ErrorMessage error={formState.errors?._errors} />}
       link={
         <BottomLink
-          text="Don't have an account?"
-          linkText="Sign up"
+          text="Sizeň hasabyňyz ýokmy?"
+          linkText="Hasap açmak"
           url={routes.signUp()}
         />
       }

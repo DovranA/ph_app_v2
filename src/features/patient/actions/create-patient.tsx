@@ -22,7 +22,7 @@ export type PatientFormState = {
   success?: boolean;
 };
 
-const formDataSchema = z.object({
+export const FormDataSchema = z.object({
   firstName: z.string().min(3),
   secondName: z.string().min(3),
   gender: z.enum(["M", "F"]),
@@ -40,13 +40,13 @@ const formDataSchema = z.object({
     .transform((val) => new Date(val)),
   doctorId: z.string(),
 });
-
+export type Inputs = z.infer<typeof FormDataSchema>;
 export const createPatientAction = async (
   _: PatientFormState,
   formData: FormData
 ): Promise<PatientFormState> => {
   const data = Object.fromEntries(formData.entries());
-  const result = formDataSchema.safeParse(data);
+  const result = FormDataSchema.safeParse(data);
   if (!result.success) {
     const formattedErrors = result.error.format();
     return {

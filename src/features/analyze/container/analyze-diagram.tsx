@@ -45,7 +45,7 @@ const AnalyzeDiagram = ({ analyzes }: Props) => {
         .then((data) => {
           setAnalyzeData((prev) => {
             const updatedData = [...prev];
-            updatedData.splice(0, 1);
+            if (prev.length >= 10) updatedData.splice(0, 1);
             updatedData.push(data);
             return updatedData;
           });

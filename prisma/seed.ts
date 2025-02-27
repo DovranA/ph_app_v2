@@ -27,6 +27,8 @@ async function main() {
       id: cuid(),
       firstName: "planyy",
       secondName: "Palnyye",
+      nationality: "turkmen",
+      section: "section",
     },
   });
 }

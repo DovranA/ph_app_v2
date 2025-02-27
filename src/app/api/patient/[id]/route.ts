@@ -39,7 +39,6 @@ const patientDataSchema = z.object({
     .string()
     .min(3)
     .transform((val) => new Date(val)),
-  doctorId: z.string(),
 });
 export async function PATCH(
   req: NextRequest,
@@ -60,6 +59,20 @@ export async function PATCH(
     if (error instanceof z.ZodError) {
       return NextResponse.json({ error: error.errors }, { status: 400 });
     }
+    return NextResponse.json({ error: "Ошибка сервера" }, { status: 500 });
+  }
+}
+export async function DELETE(
+  req: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  const patientId = (await params).id;
+  try {
+    const patient = await prisma.patient.delete({
+      where: { id: patientId },
+    });
+    return new Response(JSON.stringify(patient), { status: 200 });
+  } catch (error) {
     return NextResponse.json({ error: "Ошибка сервера" }, { status: 500 });
   }
 }

@@ -68,38 +68,38 @@ const PrintDialog = ({ id }: Props) => {
             {patient?.firstName + " " + patient?.secondName}
           </p>
           <p>
-            <strong>Birthday:</strong>
+            <strong>Doglan güni:</strong>
             {patient?.birthday
-              ? format(patient.birthday, "dd.MM.yyyy HH:mm:ss")
+              ? format(patient.birthday, "dd.MM.yyyy")
               : "no data"}
           </p>
           <p>
-            <strong>Gender:</strong>{" "}
+            <strong>Jynsy:</strong>{" "}
             {patient?.gender === "M" ? "Male" : "Female"}
           </p>
           <p>
-            <strong>Address:</strong> {patient?.address}
+            <strong>Addresi:</strong> {patient?.address}
           </p>
-          <p>
+          {/* <p>
             <strong>Medical History:</strong> {patient?.medicalHistory}
+          </p> */}
+          <p>
+            <strong>Diagnozy:</strong> {patient?.diagnose}
           </p>
           <p>
-            <strong>Diagnosis:</strong> {patient?.diagnose}
-          </p>
-          <p>
-            <strong>Admitted At:</strong>
+            <strong>Giren wagty:</strong>
             {patient?.enterAt
-              ? format(patient?.enterAt, "dd.MM.yyyy HH:mm:ss")
+              ? format(patient?.enterAt, "dd.MM.yyyy")
               : "no date"}
           </p>
 
-          <h3 className="font-semibold mt-4">Analyze Results</h3>
+          <h3 className="font-semibold mt-4">Analyz netijeleri:</h3>
           <ul className="list-disc pl-5">
             {patient?.analyze?.map((analyze) => (
               <li key={analyze.id}>
                 <strong>Value:</strong> {analyze.value} |{" "}
                 <strong>
-                  Date:
+                  Wagty:
                   {analyze?.createdAt
                     ? format(analyze.createdAt, "dd.MM.yyyy HH:mm:ss")
                     : "no date"}

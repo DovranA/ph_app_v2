@@ -3,10 +3,7 @@ import { sessionService } from "@/entities/doctor/server";
 import { Button } from "@/shared/ui/button";
 type Params = Promise<{ slug: string }>;
 type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
-// export async function generateMetadata(_: {
-//   params: Params;
-//   searchParams: SearchParams;
-// }) {}
+
 export default async function Home({
   searchParams,
 }: {

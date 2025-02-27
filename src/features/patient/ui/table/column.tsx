@@ -15,15 +15,10 @@ import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown, MoreHorizontal } from "lucide-react";
 import { format } from "date-fns/format";
 import PatientDelete from "../patient-delete";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogTitle,
-  DialogTrigger,
-} from "@/shared/ui/dialog";
+import { Dialog, DialogTrigger } from "@/shared/ui/dialog";
 import PrintDialog from "./print-dialog";
 import { CreatePatentForm } from "../../container/create-patent-dialog";
+
 export const columns: ColumnDef<Patient>[] = [
   {
     id: "select",
@@ -56,7 +51,7 @@ export const columns: ColumnDef<Patient>[] = [
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Name
+          FAA
           <ArrowUpDown />
         </Button>
       );
@@ -96,14 +91,18 @@ export const columns: ColumnDef<Patient>[] = [
     ),
   },
   {
-    accessorKey: "department",
+    accessorKey: "section",
     header: "Bölüm",
-    cell: ({ row }) => <div className="capitalize">Iç keseller</div>,
+    cell: ({ row }) => (
+      <div className="capitalize">{row.getValue("section")}</div>
+    ),
   },
   {
     accessorKey: "nationality",
     header: "Milleti",
-    cell: ({ row }) => <div className="capitalize">Turkmen</div>,
+    cell: ({ row }) => (
+      <div className="capitalize">{row.getValue("nationality")}</div>
+    ),
   },
   {
     id: "actions",
@@ -120,14 +119,14 @@ export const columns: ColumnDef<Patient>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Hereketler</DropdownMenuLabel>
-            <DropdownMenuItem className="text-red-500">
+            <DropdownMenuItem className="w-full">
               <PatientDelete id={row.original.id} />
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
               <Dialog>
                 <DialogTrigger asChild>
                   <Button className="w-full" variant="outline">
-                    Print
+                    Çap etmek
                   </Button>
                 </DialogTrigger>
                 <PrintDialog id={row.original.id} />

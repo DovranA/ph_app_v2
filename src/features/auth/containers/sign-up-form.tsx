@@ -19,16 +19,18 @@ export function SignUpForm() {
 
   return (
     <AuthFormLayout
-      title="Sign Up"
-      description="Create your account to get started"
+      title="Hasap döretmek"
+      description=""
       action={action}
       fields={<SignUpFields {...formState} />}
-      actions={<SubmitButton isPending={isPending}>Sign Up</SubmitButton>}
+      actions={
+        <SubmitButton isPending={isPending}>Hasap doretmek</SubmitButton>
+      }
       error={<ErrorMessage error={formState.errors?._errors} />}
       link={
         <BottomLink
-          text="Already have an account?"
-          linkText="Sign in"
+          text="Sizde hasap barmy?"
+          linkText="Içeri girmek"
           url={routes.signIn()}
         />
       }

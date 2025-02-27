@@ -19,36 +19,36 @@ export function SignUpFields({
   return (
     <div className="flex flex-col gap-4">
       <div className="space-y-2">
-        <Label htmlFor={firstNameId}>First Name</Label>
+        <Label htmlFor={firstNameId}>Ady</Label>
         <Input
           id={firstNameId}
           type="text"
           name="firstName"
-          placeholder="Enter your login"
+          placeholder="Ady giriziň"
           required
           defaultValue={formData?.get("firstName")?.toString()}
         />
         {errors?.firstName && <div>{errors.firstName}</div>}
       </div>
       <div className="space-y-2">
-        <Label htmlFor={secondNameId}>Second Name</Label>
+        <Label htmlFor={secondNameId}>Familiýa</Label>
         <Input
           id={secondNameId}
           type="text"
           name="secondName"
-          placeholder="Enter your login"
+          placeholder="Familiýany giriziň"
           required
           defaultValue={formData?.get("secondName")?.toString()}
         />
         {errors?.firstName && <div>{errors.firstName}</div>}
       </div>
       <div className="space-y-2">
-        <Label htmlFor={passwordId}>Password</Label>
+        <Label htmlFor={passwordId}>Açar sözi</Label>
         <Input
           id={passwordId}
           type="password"
           name="password"
-          placeholder="Enter your password"
+          placeholder="Açar sözi giriziň"
           required
           defaultValue={formData?.get("password")?.toString()}
         />

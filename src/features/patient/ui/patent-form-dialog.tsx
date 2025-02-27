@@ -1,4 +1,3 @@
-import { Button } from "@/shared/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -9,7 +8,8 @@ import {
 } from "@/shared/ui/dialog";
 
 import React from "react";
-
+import { Inputs } from "../actions/create-patient";
+import { SubmitErrorHandler, SubmitHandler } from "react-hook-form";
 export function PatientFormDialog({
   actions,
   description,
@@ -23,7 +23,7 @@ export function PatientFormDialog({
   fields: React.ReactNode;
   actions: React.ReactNode;
   error: React.ReactNode;
-  action: (formData: FormData) => void;
+  action: any;
 }) {
   return (
     <Dialog>
@@ -37,7 +37,7 @@ export function PatientFormDialog({
             {description}
           </DialogDescription>
         </DialogHeader>
-        <form action={action} className="space-y-4 ">
+        <form onSubmit={action} className="space-y-4 ">
           {fields}
           {error}
           {actions}
