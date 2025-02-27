@@ -15,7 +15,7 @@ async function PatientList({ page, search }: Props) {
   });
 
   return (
-    <div className="container mx-auto py-10">
+    <div className="mx-auto py-10 w-full">
       <DataTable columns={columns} data={patients} total={total} />
     </div>
   );

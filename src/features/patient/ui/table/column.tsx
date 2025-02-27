@@ -15,6 +15,15 @@ import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown, MoreHorizontal } from "lucide-react";
 import { format } from "date-fns/format";
 import PatientDelete from "../patient-delete";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogTitle,
+  DialogTrigger,
+} from "@/shared/ui/dialog";
+import PrintDialog from "./print-dialog";
+import { CreatePatentForm } from "../../container/create-patent-dialog";
 export const columns: ColumnDef<Patient>[] = [
   {
     id: "select",
@@ -66,7 +75,7 @@ export const columns: ColumnDef<Patient>[] = [
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Enter at
+          Giren wagty
           <ArrowUpDown />
         </Button>
       );
@@ -79,31 +88,60 @@ export const columns: ColumnDef<Patient>[] = [
   },
   {
     accessorKey: "gender",
-    header: "Gender",
+    header: "Jynsy",
     cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("gender")}</div>
+      <div className="capitalize">
+        {row.getValue("gender") == "M" ? "erkek" : "zenan"}
+      </div>
     ),
+  },
+  {
+    accessorKey: "department",
+    header: "Bölüm",
+    cell: ({ row }) => <div className="capitalize">Iç keseller</div>,
+  },
+  {
+    accessorKey: "nationality",
+    header: "Milleti",
+    cell: ({ row }) => <div className="capitalize">Turkmen</div>,
   },
   {
     id: "actions",
     enableHiding: false,
     cell: ({ row }) => {
-      const payment = row.original;
+      const pateint = row.original;
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Munu</span>
+              <span className="sr-only">Menu</span>
               <MoreHorizontal />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Hereketler</DropdownMenuLabel>
-            <DropdownMenuItem
-              className="text-red-500"
-              onClick={() => navigator.clipboard.writeText(payment.id)}
-            >
+            <DropdownMenuItem className="text-red-500">
               <PatientDelete id={row.original.id} />
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button className="w-full" variant="outline">
+                    Print
+                  </Button>
+                </DialogTrigger>
+                <PrintDialog id={row.original.id} />
+              </Dialog>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <CreatePatentForm
+                actions={
+                  <Button type="submit" className="w-full" variant="outline">
+                    Näsag üýtgetmek
+                  </Button>
+                }
+                patientId={row.original.id}
+              />
             </DropdownMenuItem>
             <DropdownMenuSeparator />
           </DropdownMenuContent>

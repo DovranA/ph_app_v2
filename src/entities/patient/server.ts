@@ -1,4 +1,5 @@
-export { getCurrentPatient } from "./services/get-current-patient";
+export { getPatient } from "./services/get-patient";
 
+export { getCurrentPatient } from "./services/get-current-patient";
 export { patientListService } from "./services/patient-list";
 export { createPatientService } from "./services/create-patient";

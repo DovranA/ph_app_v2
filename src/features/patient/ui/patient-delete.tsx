@@ -22,13 +22,13 @@ const PatientDelete = ({ id }: Props) => {
     }
   }, [formState?.success, router]);
   return (
-    <form action={action}>
+    <form className="w-full" action={action}>
       <input type="hidden" name="id" id="id" value={id} />
       <Button
         type="submit"
         disabled={isPending}
         onClick={() => router.refresh()}
-        className="text-red-500 bg-transparent hover:bg-red-500 hover:text-white rounded-lg"
+        className="text-red-500 bg-transparent w-full hover:bg-red-500 hover:text-white rounded-lg"
       >
         Pozmak
       </Button>

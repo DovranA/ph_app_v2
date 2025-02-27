@@ -13,11 +13,27 @@ import React, { useId } from "react";
 
 export function PatentFormFields({
   errors,
-  formData,
   doctorId,
+  patient,
 }: {
   formData?: FormData;
-  doctorId: string;
+  doctorId?: string;
+  patient?: {
+    id: string;
+    firstName: string;
+    secondName: string;
+    doctorId: string;
+    birthday: Date;
+    gender: string;
+    nationality: string;
+    section: string;
+    medicalHistory: string | null;
+    address: string;
+    diagnose: string | null;
+    enterAt: Date;
+    createdAt: Date | null;
+    updatedAt: Date | null;
+  } | null;
   errors?: {
     firstName?: string;
     secondName?: string;
@@ -36,6 +52,8 @@ export function PatentFormFields({
   const diagnoseId = useId();
   const enterAtId = useId();
   const docId = useId();
+  const nationalityId = useId();
+  const sectionId = useId();
   return (
     <div className="flex gap-5">
       <Input
@@ -54,7 +72,7 @@ export function PatentFormFields({
             type="text"
             name="firstName"
             placeholder="Ady"
-            defaultValue={formData?.get("firstName")?.toString()}
+            defaultValue={patient?.firstName}
           />
           {errors?.firstName && (
             <div className="text-red-500 text-sm">{errors.firstName}</div>
@@ -67,7 +85,7 @@ export function PatentFormFields({
             type="text"
             name="secondName"
             placeholder="Familyasy"
-            defaultValue={formData?.get("secondName")?.toString()}
+            defaultValue={patient?.secondName}
           />
           {errors?.secondName && (
             <div className="text-red-500 text-sm">{errors.secondName}</div>
@@ -77,10 +95,7 @@ export function PatentFormFields({
           <Label htmlFor={genderId}>Jynsy</Label>
           <Select name="gender">
             <SelectTrigger id={genderId} className="">
-              <SelectValue
-                defaultValue={formData?.get("gender")?.toString()}
-                placeholder="Jynsy"
-              />
+              <SelectValue defaultValue={patient?.gender} placeholder="Jynsy" />
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="M">Erkek</SelectItem>
@@ -91,11 +106,25 @@ export function PatentFormFields({
             <div className="text-red-500 text-sm">{errors.gender}</div>
           )}
         </div>
+        <div className="space-y-2">
+          <Label htmlFor={nationalityId}>Milleti</Label>
+          <Input
+            id={nationalityId}
+            type="text"
+            name="nationality"
+            placeholder="Milleti"
+            defaultValue={patient?.nationality}
+          />
+          {errors?.firstName && (
+            <div className="text-red-500 text-sm">{errors.firstName}</div>
+          )}
+        </div>
         <div className="space-y-2 flex flex-col">
           <Label htmlFor={birthdayId}>Doglan senesi</Label>
           <DatePicker
-            defaultValue={formData?.get("birthday")}
+            defaultValue={patient?.birthday && new Date(patient?.birthday)}
             name="birthday"
+            id={birthdayId}
             placeholder="Doglan senesi"
           />
           {errors?.birthday && (
@@ -110,7 +139,7 @@ export function PatentFormFields({
             id={addressId}
             name="address"
             placeholder="Address"
-            defaultValue={formData?.get("address")?.toString()}
+            defaultValue={patient?.address ?? ""}
             style={{ resize: "none" }}
             className="h-24"
           />
@@ -124,7 +153,7 @@ export function PatentFormFields({
             id={diagnoseId}
             name="diagnose"
             placeholder="Diagnose"
-            defaultValue={formData?.get("diagnose")?.toString()}
+            defaultValue={patient?.diagnose ?? ""}
             style={{ resize: "none" }}
             className="h-24"
           />
@@ -132,12 +161,26 @@ export function PatentFormFields({
             <div className="text-red-500 text-sm">{errors.diagnose}</div>
           )}
         </div>
+        <div className="space-y-2">
+          <Label htmlFor={sectionId}>Bölümi</Label>
+          <Input
+            id={sectionId}
+            type="text"
+            name="section"
+            placeholder="Bölüm"
+            defaultValue={patient?.section}
+          />
+          {errors?.firstName && (
+            <div className="text-red-500 text-sm">{errors.firstName}</div>
+          )}
+        </div>
         <div className="space-y-2 flex flex-col flex-1">
           <Label htmlFor={enterAtId}>Giren senesi</Label>
           <DatePicker
-            defaultValue={formData?.get("enterAt")}
+            defaultValue={patient?.enterAt && new Date(patient?.enterAt)}
             name="enterAt"
             placeholder="Giren senesi"
+            id="enterAtId"
           />
           {errors?.enterAt && (
             <div className="text-red-500 text-sm">{errors.enterAt}</div>

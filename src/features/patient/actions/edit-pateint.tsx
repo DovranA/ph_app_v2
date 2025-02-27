@@ -15,8 +15,6 @@ export type PatientFormState = {
     address?: string;
     diagnose?: string;
     enterAt?: string;
-    nationality?: string;
-    section?: string;
     _errors?: string;
   };
   success?: boolean;
@@ -28,8 +26,6 @@ const formDataSchema = z.object({
   gender: z.enum(["M", "F"]),
   address: z.string(),
   diagnose: z.string(),
-  nationality: z.string(),
-  section: z.string(),
   birthday: z
     .string()
     .min(3)
@@ -41,7 +37,7 @@ const formDataSchema = z.object({
   doctorId: z.string(),
 });
 
-export const createPatientAction = async (
+export const editPatientAction = async (
   _: PatientFormState,
   formData: FormData
 ): Promise<PatientFormState> => {
@@ -59,14 +55,12 @@ export const createPatientAction = async (
         diagnose: formattedErrors.diagnose?._errors.join(","),
         address: formattedErrors.address?._errors.join(", "),
         birthday: formattedErrors.birthday?._errors.join(", "),
-        nationality: formattedErrors.nationality?._errors.join(", "),
-        section: formattedErrors.section?._errors.join(", "),
-        _errors: "Ошибка обработки данных",
+        _errors: formattedErrors._errors.join(", "),
       },
     };
   }
   try {
-    await patientRepository.createPatients({
+    await patientRepository.updatePatient({
       ...result.data,
       id: cuid(),
       createdAt: new Date(),
@@ -78,11 +72,11 @@ export const createPatientAction = async (
       errors: undefined,
       success: true,
     };
-  } catch (error: unknown) {
+  } catch (error: any) {
     return {
       formData,
       errors: {
-        _errors: error instanceof Error ? error.message : "Неизвестная ошибка",
+        _errors: error,
       },
     };
   }

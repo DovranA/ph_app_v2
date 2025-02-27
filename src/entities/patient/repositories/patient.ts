@@ -1,5 +1,6 @@
 import prisma from "@/shared/lib/db";
 import { Patient, Prisma } from "@prisma/client";
+import { DefaultArgs } from "@prisma/client/runtime/library";
 
 function createPatients(patient: Patient) {
   return prisma.patient.upsert({
@@ -9,13 +10,23 @@ function createPatients(patient: Patient) {
     omit: { doctorId: true },
   });
 }
+function updatePatient(patient: Partial<Patient>) {
+  return prisma.patient.update({
+    data: { ...patient },
+    where: { id: patient.id },
+  });
+}
 function deletePatient(id: string) {
   return prisma.patient.delete({ where: { id } });
 }
 
-function getPatient(where: Prisma.PatientWhereInput) {
+function getPatient(
+  where: Prisma.PatientWhereInput,
+  include?: Prisma.PatientInclude<DefaultArgs>
+) {
   return prisma.patient.findFirst({
     where,
+    include,
   });
 }
 async function getPatientList(
@@ -35,4 +46,5 @@ export const patientRepository = {
   getPatient,
   getPatientList,
   deletePatient,
+  updatePatient,
 };

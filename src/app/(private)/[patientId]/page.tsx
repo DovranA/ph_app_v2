@@ -21,8 +21,6 @@ export default async function Page({
   const patientData = await getCurrentPatient(patientId);
   const analyzeData = await analyzeListService({ patientId });
 
-  // console.log(patientData);
-
   return (
     <div className="w-full h-[calc(100vh-5rem)] flex flex-col justify-between">
       <div className="w-full flex p-6 text-lg gap-4">
@@ -46,7 +44,7 @@ export default async function Page({
         />
         <DetailColumn
           first={convertToDDMMYYYY(patientData?.enterAt) ?? ""}
-          second={convertToDDMMYYYY(patientData?.createdAt)}
+          second={convertToDDMMYYYY(patientData?.createdAt ?? new Date())}
           firstkey="Giren wagty"
           secondkey="Ýazga alnan wagty"
         />
