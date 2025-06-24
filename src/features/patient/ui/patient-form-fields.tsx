@@ -141,12 +141,12 @@ export function PatentFormFields({
       </div>
       <div className="flex flex-col flex-1">
         <div className="space-y-2 flex flex-col flex-1">
-          <Label htmlFor={addressId}>Address</Label>
+          <Label htmlFor={addressId}>Salgysy</Label>
           <Textarea
             id={addressId}
-            {...register("address", { required: "Address ýazylmaly" })}
+            {...register("address", { required: "Salgysy ýazylmaly" })}
             name="address"
-            placeholder="Address"
+            placeholder="Salgysy"
             style={{ resize: "none" }}
             className="h-24"
           />
@@ -155,11 +155,11 @@ export function PatentFormFields({
           )}
         </div>
         <div className="space-y-2 flex flex-col flex-1">
-          <Label htmlFor={diagnoseId}>Diagnose</Label>
+          <Label htmlFor={diagnoseId}>Kesel kesgidi</Label>
           <Textarea
             id={diagnoseId}
-            {...register("diagnose", { required: "Diagnose ýazylmaly" })}
-            placeholder="Diagnose"
+            {...register("diagnose", { required: "Kesel kesgidi ýazylmaly" })}
+            placeholder="Kesel kesgidi"
             style={{ resize: "none" }}
             className="h-24"
           />

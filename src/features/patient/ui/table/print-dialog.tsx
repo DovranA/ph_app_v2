@@ -78,13 +78,13 @@ const PrintDialog = ({ id }: Props) => {
             {patient?.gender === "M" ? "Male" : "Female"}
           </p>
           <p>
-            <strong>Addresi:</strong> {patient?.address}
+            <strong>Salgysy:</strong> {patient?.address}
           </p>
           {/* <p>
             <strong>Medical History:</strong> {patient?.medicalHistory}
           </p> */}
           <p>
-            <strong>Diagnozy:</strong> {patient?.diagnose}
+            <strong>Kesel kesgidi:</strong> {patient?.diagnose}
           </p>
           <p>
             <strong>Giren wagty:</strong>
@@ -97,7 +97,7 @@ const PrintDialog = ({ id }: Props) => {
           <ul className="list-disc pl-5">
             {patient?.analyze?.map((analyze) => (
               <li key={analyze.id}>
-                <strong>Value:</strong> {analyze.value} |{" "}
+                <strong>Bahasy:</strong> {analyze.value} |{" "}
                 <strong>
                   Wagty:
                   {analyze?.createdAt

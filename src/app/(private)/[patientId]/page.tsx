@@ -33,13 +33,13 @@ export default async function Page({
           first={convertToDDMMYYYY(patientData?.birthday) ?? ""}
           second={patientData?.address ?? ""}
           firstkey="Doglan senesi"
-          secondkey="Addresi"
+          secondkey="Salgysy"
         />
         <DetailColumn
           first={patientData?.medicalHistory ?? ""}
           second={patientData?.diagnose ?? ""}
           firstkey="Kesel taryhy"
-          secondkey="Diagnosy"
+          secondkey="Kesel kesgidi"
         />
         <DetailColumn
           first={convertToDDMMYYYY(patientData?.enterAt) ?? ""}
